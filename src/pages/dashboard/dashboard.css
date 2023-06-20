@@ -1,0 +1,15 @@
+.banner {
+    /* height: 10rem !important; */
+    /* background-color: aqua; */
+
+}
+
+.banner-image {
+    object-fit: cover !important;
+    width: 100%;
+
+}
+
+/* .statistic {
+    width: 8rem;
+} */

@@ -4,6 +4,7 @@ import { FaSmile } from 'react-icons/fa'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,13 +13,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 function Login({onLogin}) {
   
   const [passwordStrength, setPasswordStrength] = useState('');
+  const [passwordListArray, setPasswordListArray] = useState([]);
   const [page, setPage] = useState(true);
   const toggleForm = () => setPage(!page);
   const [iconColor, setIconColor] = useState('');
 
- 
+  const loginSchema = yup.object().shape({
+    name: yup.string().required('Name is required'),
+    password: yup.string().required('Password is required'),
+  });
 
-  const schema = yup.object().shape({
+  const signUpSchema = yup.object().shape({
     name: yup.string().required('Name is required'),
    
    
@@ -41,7 +46,7 @@ function Login({onLogin}) {
       .required('Confirm password is required'),
   });
 
-  
+  const schema = page ? signUpSchema : loginSchema;
 
     
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
@@ -88,20 +93,42 @@ function Login({onLogin}) {
     
     }, [passwordStrength]);
 
-    
+  
 
-    const onSubmit = (data, e) => {
-      console.log(data);
+    const onSubmitSignup = (data, e) => {
+      let passwordList = JSON.parse(localStorage.getItem('passwordList')) || [];
+      // setPasswordListArray((prevPasswordListArray) => [...prevPasswordListArray, passwordList]);
 
-      localStorage.setItem('formData', JSON.stringify(data));
-      console.log(passwordStrength);
-      
+      const passwordStrength = getPasswordStrength(data.password);
+      const formData = {
+        ...data,
+        signupTime: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
+        strength: passwordStrength
+      };
+      // setPasswordListArray((prevPasswordListArray) => [...prevPasswordListArray, formData]);
+
+      // localStorage.setItem('passwordList', JSON.stringify(passwordListArray));
+      localStorage.setItem('passwordList', JSON.stringify([...passwordList, formData]));
+      alert('Your account has been created successfully!');
       e?.target.reset();
-      alert("your account has been created successfully!");
       setPage(!page);
-     
+      console.log(data);
+    };
+    
+    const onSubmitLogin = (data, e) => {
+      
+      const loginData = {
+        name: data.name,
+        password: data.password
+      };
+      // console.log(loginData);
+      onLogin(loginData);
+      e?.target.reset();
+      setPage(!page);
       
     };
+
+    const onSubmit = page ? onSubmitSignup : onSubmitLogin;
 
     // const handleLogin = (data, e) => {
     //   // code to handle login (e.g. make an API call)
@@ -119,7 +146,7 @@ function Login({onLogin}) {
       <div className='w-full md:w-1/2 flex justify-center items-center  h-full px-2 md:px-4 py-8 md:py-10 formSection '>
         {
           page ? 
-          <form method='post' className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit )}>
+          <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit )}>
             <div className='mb-6 md:mb-10 flex flex-col justify-center items-center'>
               <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#1666dc]">Welcome! </span></h2>
               <p className='text-black text-lg'>Enter your details to create a new account</p>
@@ -163,7 +190,7 @@ function Login({onLogin}) {
         </form>
             : 
 
-            <form className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onLogin)}>
+            <form method='get' className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
              <div className='mb-6 md:mb-10 flex flex-col justify-center items-center'>
               <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#1c7ee7]">Welcome Back!</span></h2>
               <p className='text-black text-lg'>Enter your details to login</p>
@@ -192,12 +219,14 @@ function Login({onLogin}) {
                 <p className='text-sm'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
               </div>
               <div>
-                <button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                <button type='submit'  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                {/* <Link to="/dashboard"><button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >Login</button></Link> */}
               </div>
             </form>
         }
       </div>
-     <div className='w-full md:w-1/2 flex flex-col justify-center items-center py-12 md:py-24 mb-8 md:mb-0 bg-none h-full md:h-full'>
+     <div className='w-full md:w-1/2 flex flex-col justify-center items-center py-12 md:py-24 mb-8 md:mb-0  h-full md:h-full loginBanner'>
         
         <div className='w-2/3 flex justify-center items-center h-full'>
           <FaSmile 
