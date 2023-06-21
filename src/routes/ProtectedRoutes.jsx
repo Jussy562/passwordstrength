@@ -15,5 +15,5 @@ return auth ? (
     );
   };
 
-  export default PrivateRoute
+  export default PrivateRoute;
  
