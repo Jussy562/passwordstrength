@@ -5,7 +5,7 @@ import '../src/pages/login/login.css'
 import './App.css'
 import Login from '../src/pages/login/Login'
 import PrivateRoute from './routes/ProtectedRoutes';
-import Dashboard from '../src/pages/dashboard/dashboard';
+import Dashboard from './pages/dashboard/Dashboard';
 
 
 
