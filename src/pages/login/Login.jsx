@@ -184,7 +184,7 @@ function Login({onLogin}) {
           
           {/*  */}
           <div className='mb-5'>
-            <p className='text-sm'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
+            <p className='text-sm text-black'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
           </div>
           <div >
               <button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Create account</button>
@@ -218,7 +218,7 @@ function Login({onLogin}) {
             </div>
               
               <div className='mb-5'>
-                <p className='text-sm'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
+                <p className='text-sm text-black'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
               </div>
               <div>
                 <button 

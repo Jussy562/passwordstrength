@@ -8,7 +8,9 @@ function AdminNavbar({
     handleStrongPassword,
     handleVeryStrongPassword,
     handleAllPassword,
+    user,
     onLogout}) {
+    const name = user?.name.toUpperCase();
   return (
     <div className='w-full  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-full'>
             <div className=' flex flex-col  w-auto h-full'>
@@ -17,7 +19,7 @@ function AdminNavbar({
                     
                 </div>
                 <div className='mb-5'>
-                    <h1 className='text-gray-300 text-3xl'>Hello, <span className='text-white font-bold'>EMERALD</span></h1>
+                    <h1 className='text-gray-300 text-3xl'>Hello, <span className='text-white font-bold'>{name}</span></h1>
                 </div>
                 <p className='text-gray-300 mb-4 text-sm'>Welcome to your dashboard, kindly sort through the user and password</p>
                 
@@ -28,7 +30,7 @@ function AdminNavbar({
                         Based On Password Strength
                     </p>
 
-                    <div className='w-full flex md:flex-row  md:flex-nowrap items-center justify-between mt-4 gap-2 md:gap-4'>
+                    <div className='w-full flex flex-row flex-wrap  md:flex-wrap xl:flex-nowrap items-center justify-center mt-4 gap-7 md:gap-4'>
                         <div 
                         
                         className='text-center'>

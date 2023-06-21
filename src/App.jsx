@@ -35,7 +35,7 @@ function App() {
       if (user) {
         setAuthData(user);
         setIsLoggedIn(true);
-        localStorage.setItem('logginDetails', JSON.stringify(user));
+        localStorage.setItem('loginDetails', JSON.stringify(user));
         
       } else {
         alert('Incorrect name or password. Try again!');

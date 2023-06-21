@@ -13,10 +13,16 @@ function Dashboard({onLogout}) {
     const [strongPasswords, setStrongPasswords] = useState(0);
     const [veryStrongPasswords, setVeryStrongPasswords] = useState(0);
     const [allPasswords, setAllPasswords] = useState(0);
+    const [loggedUser, setLoggedUser] = useState(null);
   
 
     useEffect(() => {
         // Retrieve stored form data from local storage
+        const storedLoggedUser = localStorage.getItem('loginDetails');
+        if(storedLoggedUser) {
+          const userData = JSON.parse(storedLoggedUser);
+          setLoggedUser(userData);
+        }
         const storedPasswordData = localStorage.getItem('passwordList');
     
         if (storedPasswordData) {
@@ -90,6 +96,7 @@ function Dashboard({onLogout}) {
                 handleStrongPassword={handleStrongPassword}
                 handleVeryStrongPassword={handleVeryStrongPassword}
                 handleAllPassword={handleAllPassword}
+                user = {loggedUser}
                 onLogout={onLogout} />
             </div>
             <div className='w-full md:w-2/3 flex flex-col h-auto'>
