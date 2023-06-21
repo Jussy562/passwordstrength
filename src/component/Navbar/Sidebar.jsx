@@ -14,7 +14,7 @@ function AdminNavbar({
             <div className=' flex flex-col  w-auto h-full'>
                 <div className='flex flex-row justify-start mb-16'>
                     <button onClick={onLogout}  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
-                    {/* <Link to="/dashboard"><button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button></Link> */}
+                    
                 </div>
                 <div className='mb-5'>
                     <h1 className='text-gray-300 text-3xl'>Hello, <span className='text-white font-bold'>EMERALD</span></h1>
@@ -28,7 +28,7 @@ function AdminNavbar({
                         Based On Password Strength
                     </p>
 
-                    <div className='w-full flex flex-col md:flex-row flex-wrap items-center md:justify-between mt-4 gap-4'>
+                    <div className='w-full flex md:flex-row  md:flex-nowrap items-center justify-between mt-4 gap-2 md:gap-4'>
                         <div 
                         
                         className='text-center'>

@@ -4,7 +4,7 @@ import { FaSmile } from 'react-icons/fa'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,10 +13,11 @@ import { Link } from 'react-router-dom';
 function Login({onLogin}) {
   
   const [passwordStrength, setPasswordStrength] = useState('');
-  const [passwordListArray, setPasswordListArray] = useState([]);
+  
   const [page, setPage] = useState(true);
   const toggleForm = () => setPage(!page);
   const [iconColor, setIconColor] = useState('');
+ 
 
   const loginSchema = yup.object().shape({
     name: yup.string().required('Name is required'),
@@ -76,7 +77,7 @@ function Login({onLogin}) {
 
     useEffect(() => {
       
-      // Define your color logic based on the value of passwordStrength
+      // Define color logic based on the value of passwordStrength
       if (passwordStrength === 'Very Poor') {
         setIconColor('#ff0808'); // Set the color to red for 'Very Poor' strength
       } else if (passwordStrength === 'Weak') {
@@ -93,11 +94,17 @@ function Login({onLogin}) {
     
     }, [passwordStrength]);
 
-  
+    const navigate = useNavigate();
+
+    const handleLoginClick = () => {
+     
+        navigate('/dashboard');
+      
+    };
 
     const onSubmitSignup = (data, e) => {
       let passwordList = JSON.parse(localStorage.getItem('passwordList')) || [];
-      // setPasswordListArray((prevPasswordListArray) => [...prevPasswordListArray, passwordList]);
+      
 
       const passwordStrength = getPasswordStrength(data.password);
       const formData = {
@@ -105,9 +112,7 @@ function Login({onLogin}) {
         signupTime: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
         strength: passwordStrength
       };
-      // setPasswordListArray((prevPasswordListArray) => [...prevPasswordListArray, formData]);
-
-      // localStorage.setItem('passwordList', JSON.stringify(passwordListArray));
+     
       localStorage.setItem('passwordList', JSON.stringify([...passwordList, formData]));
       alert('Your account has been created successfully!');
       e?.target.reset();
@@ -116,27 +121,24 @@ function Login({onLogin}) {
     };
     
     const onSubmitLogin = (data, e) => {
-      
+      e.preventDefault();
       const loginData = {
         name: data.name,
         password: data.password
       };
-      // console.log(loginData);
+     
       onLogin(loginData);
       e?.target.reset();
       setPage(!page);
+      handleLoginClick();
       
     };
 
     const onSubmit = page ? onSubmitSignup : onSubmitLogin;
 
-    // const handleLogin = (data, e) => {
-    //   // code to handle login (e.g. make an API call)
-    //   console.log(data); // log form data to console
-    //   e?.target.reset();
-    // }
+    
   
-
+    
     
   
     
@@ -190,7 +192,7 @@ function Login({onLogin}) {
         </form>
             : 
 
-            <form method='get' className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
+            <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
              <div className='mb-6 md:mb-10 flex flex-col justify-center items-center'>
               <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#1c7ee7]">Welcome Back!</span></h2>
               <p className='text-black text-lg'>Enter your details to login</p>
@@ -219,9 +221,11 @@ function Login({onLogin}) {
                 <p className='text-sm'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
               </div>
               <div>
-                <button type='submit'  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
-                {/* <Link to="/dashboard"><button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >Login</button></Link> */}
+                <button 
+                type='submit'
+                 
+                className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                
               </div>
             </form>
         }

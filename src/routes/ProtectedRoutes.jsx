@@ -1,12 +1,11 @@
 import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 
 const PrivateRoute = ({ isLoggedIn, children }) => {
-    // Check the isLoggedIn state directly
-    console.log('Please work');
-    // const auth = isLoggedIn;
-    const auth = true;
+    
+    const auth = isLoggedIn;
+    
 return auth ? (
         <React.Fragment>{children}</React.Fragment>
       

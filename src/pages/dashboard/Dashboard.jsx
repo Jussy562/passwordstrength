@@ -82,7 +82,7 @@ function Dashboard({onLogout}) {
         <div className=' w-full banner h-40'>
             <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
         </div>
-        <div className='w-full h-full flex flex-row '>
+        <div className='w-full h-full flex flex-col md:flex-row '>
             <div className='w-full md:w-1/3 h-auto  py-0'>
                 <AdminNavbar
                 handleWeakPassword={handleWeakPassword} 
@@ -94,7 +94,7 @@ function Dashboard({onLogout}) {
             </div>
             <div className='w-full md:w-2/3 flex flex-col h-auto'>
                 
-                <div className='mb-0 w-full p-10 pb-0 flex flex-row gap-7 justify-center items-center h-auto'>
+                <div className='mb-0 w-full p-4 md:p-10 pb-0 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
                     <PasswordStatistic title='Weak' statistic={weakPasswords} />
                     <PasswordStatistic title='Moderate' statistic={moderatePasswords} />
                     <PasswordStatistic title='Strong' statistic={strongPasswords} />
@@ -102,12 +102,12 @@ function Dashboard({onLogout}) {
                     
                     <PasswordStatistic title='All' statistic={allPasswords} />
                 </div>
-                <div className='flex flex-col gap-5 w-full px-20 py-10 justify-start h-full shadow-lg'>
+                <div className='flex flex-col gap-5 w-full px-4 md:px-20 py-8 md:py-10 justify-start h-full shadow-lg'>
                     {
                         userForDisplay.map((item, index) => {
                             return (
-                                <div key={item.index}
-                                className='flex flex-row justify-between items-center 
+                                <div key={index}
+                                className='w-full flex flex-row flex-wrap justify-between items-center 
                                 px-4 py-5 bg-gray-50 rounded-xl shadow-md'>
                                     <p>{item.name}</p>
                                     <p>{item.password}</p>

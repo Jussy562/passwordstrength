@@ -26,9 +26,9 @@ function PasswordStatistic({title, statistic}) {
   return (
     <div className='flex flex-col items-center justify-center'>
         <p>{title}</p>
-        <div className='flex flex-row justify-center items-center p-10 rounded-2xl
-        shadow-xl bg-white w-20 xl:w-40 statistic'>
-            <p className='text-xl  font-bold' style={{ color }}>{statistic}</p>
+        <div className='flex flex-row justify-center items-center px-12 py-8 rounded-2xl
+        shadow-xl bg-white w-20 md:w-24 xl:w-36 statistic'>
+            <p className='text-2xl font-extrabold' style={{ color }}>{statistic}</p>
         </div>
     </div>
   )
