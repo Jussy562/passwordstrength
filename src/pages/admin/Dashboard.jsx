@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import AdminNavbar from '../../component/Navbar/Sidebar'
 import dashboardbanner from '/assets/dashboardbanner.jpg';
 import PasswordStatistic from './PasswordStatistic';
+import DataTable from '../../component/table/DataTable';
 
 
 function Dashboard({onLogout}) {
@@ -84,12 +85,13 @@ function Dashboard({onLogout}) {
       });
       
   return (
-    <div className='flex flex-col w-full h-fu'>
-        <div className=' w-full banner h-40'>
+    <div className='flex flex-col w-full bg-[#d2d3de] '>
+        {/* <div className=' w-full banner h-40'>
             <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
-        </div>
-        <div className='w-full h-full flex flex-col md:flex-row '>
-            <div className='w-full md:w-1/3 h-auto  py-0'>
+        </div> */}
+        <div className='w-full h-full flex flex-col md:flex-row bg-[#eaeaea]'>
+            
+            <div className='w-full md:w-1/3 h-full left-0 top-0   py-0 '>
                 <AdminNavbar
                 handleWeakPassword={handleWeakPassword} 
                 handleModeratePassword={handleModeratePassword}
@@ -99,9 +101,12 @@ function Dashboard({onLogout}) {
                 user = {loggedUser}
                 onLogout={onLogout} />
             </div>
-            <div className='w-full md:w-2/3 flex flex-col h-auto'>
-                
-                <div className='mb-0 w-full p-4 md:p-10 pb-0 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
+            <div className='w-full md:w-2/3 top-0 flex flex-col h-full relative left-0 '>
+                <div className=' w-full banner h-40'>
+                    <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
+                </div>
+                    
+                <div className='mb-0 w-full p-4 md:p-10 pb-4 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
                     <PasswordStatistic title='Weak' statistic={weakPasswords} />
                     <PasswordStatistic title='Moderate' statistic={moderatePasswords} />
                     <PasswordStatistic title='Strong' statistic={strongPasswords} />
@@ -109,21 +114,9 @@ function Dashboard({onLogout}) {
                     
                     <PasswordStatistic title='All' statistic={allPasswords} />
                 </div>
-                <div className='flex flex-col gap-5 w-full px-4 md:px-20 py-8 md:py-10 justify-start h-full shadow-lg'>
-                    {
-                        userForDisplay.map((item, index) => {
-                            return (
-                                <div key={index}
-                                className='w-full flex flex-row flex-wrap justify-between items-center 
-                                px-4 py-5 bg-gray-50 rounded-xl shadow-md'>
-                                    <p>{item.name}</p>
-                                    <p>{item.password}</p>
-                                    <p>{item.strength}</p>
-                                    <p>{item.signupTime}</p>
-                                </div>
-                            )
-                        })
-                    }
+                <div className='flex flex-col w-full h-auto px-2 md:px-6 py-8 md:py-10 pt-4 justify-start tablediv shadow-lg bg-white'>
+                  <DataTable userData={userForDisplay} />
+                   
                 </div>
             </div>
         </div>

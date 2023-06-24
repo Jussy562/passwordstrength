@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
-import '../src/pages/dashboard/dashboard.css'
-import '../src/pages/login/login.css'
+import '../src/pages/admin/admin.css'
+import '../src/pages/login/login.css';
+import '../src/component/table/table.css';
 import './App.css'
 import Login from '../src/pages/login/Login'
+import Dashboard from './pages/admin/Dashboard';
 import PrivateRoute from './routes/ProtectedRoutes';
-import Dashboard from './pages/dashboard/Dashboard';
+
 
 
 
