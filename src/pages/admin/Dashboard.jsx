@@ -85,13 +85,13 @@ function Dashboard({onLogout}) {
       });
       
   return (
-    <div className='flex flex-col w-full bg-[#d2d3de] '>
+    <div className='flex flex-col w-full bg-[#e8e8e8] overflow-hidden'>
         {/* <div className=' w-full banner h-40'>
             <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
         </div> */}
-        <div className='w-full h-full flex flex-col md:flex-row bg-[#eaeaea]'>
+        <div className='w-full h-full flex flex-col md:flex-row bg-[#f5f5f5]'>
             
-            <div className='w-full md:w-1/3 h-full left-0 top-0   py-0 '>
+            <div className='w-full md:w-1/4 h-full left-0 top-0   py-0 '>
                 <AdminNavbar
                 handleWeakPassword={handleWeakPassword} 
                 handleModeratePassword={handleModeratePassword}
@@ -101,23 +101,25 @@ function Dashboard({onLogout}) {
                 user = {loggedUser}
                 onLogout={onLogout} />
             </div>
-            <div className='w-full md:w-2/3 top-0 flex flex-col h-full relative left-0 '>
-                <div className=' w-full banner h-40'>
+            <div className='w-full md:w-3/4   top-0 flex flex-col items-center h-full relative left-0 '>
+                <div className=' w-full banner h-40 sticky'>
                     <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
                 </div>
+                <div className='px-2 md:px-4 w-full'>
+                  <div className=' w-full shadow-xl rounded-lg bg-white p-4 md:p-6 mb-8 mt-12 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
+                      <PasswordStatistic title='Weak' statistic={weakPasswords} />
+                      <PasswordStatistic title='Moderate' statistic={moderatePasswords} />
+                      <PasswordStatistic title='Strong' statistic={strongPasswords} />
+                      <PasswordStatistic title='Very Strong' statistic={veryStrongPasswords} />
+                      
+                      <PasswordStatistic title='All' statistic={allPasswords} />
+                  </div>
+                  <div className='flex flex-col  w-full h-auto  py-8 md:py-10 pt-4 justify-start tablediv'>
+                    <DataTable userData={userForDisplay} />
                     
-                <div className='mb-0 w-full p-4 md:p-10 pb-4 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
-                    <PasswordStatistic title='Weak' statistic={weakPasswords} />
-                    <PasswordStatistic title='Moderate' statistic={moderatePasswords} />
-                    <PasswordStatistic title='Strong' statistic={strongPasswords} />
-                    <PasswordStatistic title='Very Strong' statistic={veryStrongPasswords} />
-                    
-                    <PasswordStatistic title='All' statistic={allPasswords} />
-                </div>
-                <div className='flex flex-col w-full h-auto px-2 md:px-6 py-8 md:py-10 pt-4 justify-start tablediv shadow-lg bg-white'>
-                  <DataTable userData={userForDisplay} />
-                   
-                </div>
+                  </div>
+                </div>  
+                
             </div>
         </div>
     </div>

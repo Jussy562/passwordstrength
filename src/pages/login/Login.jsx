@@ -145,7 +145,7 @@ function Login({onLogin}) {
   return (
     <div className='flex flex-col-reverse md:flex-row md:justify-center items-center login py-0 md:py-0 h-screen'>
         
-      <div className='w-full md:w-1/2 flex justify-center items-center  h-auto md:h-full px-2 md:px-4 py-8 md:py-10 formSection '>
+      <div className='w-full md:w-1/2 flex justify-center items-center  h-auto md:h-full px-2 md:px-4 py-4 md:py-6 formSection '>
         {
           page ? 
           <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit )}>
@@ -154,7 +154,7 @@ function Login({onLogin}) {
               <p className='text-black text-lg'>Enter your details to create a new account</p>
             </div>
             <div className='flex flex-col justify-between items-start gap-4 w-full mb-4'>
-              <div className="mb-6 flex flex-col text-start w-full">
+              <div className="mb-4 flex flex-col text-start w-full">
                 <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Name</label>
                 <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="First Name"   />
                 { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}
@@ -165,7 +165,7 @@ function Login({onLogin}) {
      
           
             <div className='flex flex-col justify-between items-center gap-4 w-full'>
-              <div className="mb-6 flex flex-col text-start w-full">
+              <div className="mb-4 flex flex-col text-start w-full">
                 <label htmlFor="password" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Create password</label>
                 <input type="password" id="password" 
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  
@@ -175,7 +175,7 @@ function Login({onLogin}) {
                  />
                 {errors.password && <p  className='text-red-400 text-xs'>{errors.password.message}</p>}
               </div>
-              <div className="mb-6 flex flex-col text-start w-full">
+              <div className="mb-4 flex flex-col text-start w-full">
                 <label htmlFor="confirmPassword" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Confirm password</label>
                 <input type="password" id="confirmPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder='*******' {...register('confirmPassword')}  />
                 { errors.confirmPassword && <p  className='text-red-400 text-xs'>{errors.confirmPassword.message}</p>}
@@ -199,7 +199,7 @@ function Login({onLogin}) {
             </div>
 
             <div className='flex flex-col justify-between items-start gap-4 w-full mb-4'>
-              <div className="mb-6 flex flex-col text-start w-full">
+              <div className="mb-4 flex flex-col text-start w-full">
                 <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Name</label>
                 <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="First Name"   />
                 { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}

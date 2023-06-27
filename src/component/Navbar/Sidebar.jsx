@@ -12,7 +12,7 @@ function AdminNavbar({
     onLogout}) {
     const name = user?.name.toUpperCase();
   return (
-    <div className='w-full md:w-1/3 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full'>
+    <div className='w-full md:w-1/4 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full'>
             <div className='flex flex-col  w-auto h-auto'>
                 <div className='flex flex-row justify-start mb-16'>
                     <button onClick={onLogout}  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
@@ -30,7 +30,7 @@ function AdminNavbar({
                         View Based On
                     </p>
 
-                    <div className='w-full flex flex-row flex-wrap  md:flex-nowrap items-center justify-center mt-4 gap-7 md:gap-4'>
+                    <div className='w-full flex flex-row md:flex-wrap  xl:flex-nowrap items-center justify-center mt-4 gap-4 xl:gap-7'>
                         <div 
                         
                         className='flex flex-col justify-center items-center'>

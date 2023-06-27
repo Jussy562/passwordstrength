@@ -8,21 +8,22 @@ function DataTable({userData}) {
   return (
     <div className="media rounded-2xl">
  
-        <div className="media-body shadow-lg">
-            <h4 className="media-heading text-black font-bold mb-3">USER DATA</h4>
-            <div className=' table-container rounded-2xl'>
-              <table className="user-table  rounded-2xl p-4 bg-white">
-                  <thead className='rounded-2xl' >
+        <div className="media-body w-full shadow-xl rounded-xl">
+            
+            <h4 className="media-heading text-black text-lg font-bold mb-3 rounded-t-xl">USER DATA</h4>
+            <div className=' table-container rounded-2xl w-full'>
+              <table className="user-table  rounded-2xl p-0 md:p-4  bg-white w-full">
+                  <thead className='border-collapse border-none m-0 p-0 w-full'>
                     
-                      <tr>
-                      <th> Name</th>
-                      <th> Password</th>
-                      <th> Strength</th>
-                      <th> Time</th>
+                      <tr className='w-full'>
+                      <th className='text-sm md:text-lg'> Name</th>
+                      <th className='text-sm md:text-lg'> Password</th>
+                      <th className='text-sm md:text-lg'> Strength</th>
+                      <th className='text-sm md:text-lg'> Time</th>
                       </tr>
                     
                   </thead>
-                  <tbody>
+                  <tbody className='w-full '>
                   {
                     userData.map((item, index) =>
                     {  let color;
@@ -57,16 +58,16 @@ function DataTable({userData}) {
                       const time = signupDate ? (isCurrentDate ? signupDate.toLocaleTimeString() : signupDate.toLocaleDateString()) : 'NILL';
 
                       return (
-                                        <tr key={index} className='text-start'>
-                                          <td>
+                                        <tr key={index} className='text-start w-full'>
+                                          <td className='text-sm md:text-lg'>
                                             <strong className='flex flex-row items-center gap-2'>
                                               <FaUserAlt />
                                             {item.name}
                                             </strong>
                                           </td>
-                                          <td className=''>{item.password}</td>
-                                          <td ><p className='status' style={{backgroundColor: color, color:text}}>{strength}</p></td>
-                                          <td>{time}</td>
+                                          <td className='text-sm md:text-lg'>{item.password}</td>
+                                          <td className='text-sm md:text-lg'><p className='status' style={{backgroundColor: color, color:text}}>{strength}</p></td>
+                                          <td className='text-sm md:text-lg'>{time}</td>
                                         </tr>
                                       )
                                     })
