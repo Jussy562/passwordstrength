@@ -143,9 +143,9 @@ function Login({onLogin}) {
   
     
   return (
-    <div className='flex flex-col-reverse md:flex-row md:justify-center items-center login py-0 md:py-0 h-full'>
+    <div className='flex flex-col-reverse md:flex-row md:justify-center items-center login py-0 md:py-0 h-screen'>
         
-      <div className='w-full md:w-1/2 flex justify-center items-center  h-full px-2 md:px-4 py-8 md:py-10 formSection '>
+      <div className='w-full md:w-1/2 flex justify-center items-center  h-auto md:h-full px-2 md:px-4 py-8 md:py-10 formSection '>
         {
           page ? 
           <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit )}>
@@ -230,7 +230,8 @@ function Login({onLogin}) {
             </form>
         }
       </div>
-     <div className='w-full md:w-1/2 flex flex-col justify-center items-center py-12 md:py-24 mb-8 md:mb-0  h-full md:h-full loginBanner'>
+      
+     <div className='w-full md:w-1/2 h-auto md:h-full flex flex-col justify-center items-center py-12 md:py-24 mb-8 md:mb-0   loginBanner'>
         
         <div className='w-2/3 flex justify-center items-center h-full'>
           <FaSmile 
