@@ -30,7 +30,7 @@ function AdminNavbar({
                         View Based On
                     </p>
 
-                    <div className='w-full flex flex-row md:flex-wrap  xl:flex-nowrap items-center justify-center mt-4 gap-4 xl:gap-7'>
+                    <div className='w-full flex flex-row md:flex-wrap  lg:flex-nowrap items-center justify-center mt-4 gap-4 xl:gap-7'>
                         <div 
                         
                         className='flex flex-col justify-center items-center'>
