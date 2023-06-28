@@ -1,7 +1,8 @@
 import React, {useState, useEffect,  }from 'react';
 import * as yup from 'yup';
 import { FaSmile } from 'react-icons/fa'
-
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import secure from '/assets/secure.jpg';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +12,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Login({onLogin}) {
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const [passwordStrength, setPasswordStrength] = useState('');
   
   const [page, setPage] = useState(true);
@@ -27,7 +31,7 @@ function Login({onLogin}) {
   const signUpSchema = yup.object().shape({
     name: yup.string().required('Name is required'),
    
-   
+    userName: yup.string().required('Username is requird'),
     password: yup
       .string()
       .test(
@@ -143,20 +147,22 @@ function Login({onLogin}) {
   
     
   return (
-    <div className='flex flex-col-reverse md:flex-row md:justify-center items-center login py-0 md:py-0 h-screen'>
+    <div className='flex flex-col-reverse md:flex-row md:justify-center items-center md:items-center login py-0 md:py-0 h-screen  w-full'>
         
-      <div className='w-full md:w-1/2 flex justify-center items-center  h-auto md:h-full px-2 md:px-4 py-4 md:py-6 formSection '>
+      <div className='w-full md:w-1/2 flex justify-center items-center  h-auto md:h-5/6 px-1 md:px-2 py-1` md:py-2 formSection shadow-xl'>
         {
           page ? 
-          <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit )}>
-            <div className='mb-6 md:mb-10 flex flex-col justify-center items-center'>
-              <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#1666dc]">Welcome! </span></h2>
-              <p className='text-black text-lg'>Enter your details to create a new account</p>
-            </div>
+          <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-5 details' onSubmit={handleSubmit(onSubmit )}>
+            
             <div className='flex flex-col justify-between items-start gap-4 w-full mb-4'>
-              <div className="mb-4 flex flex-col text-start w-full">
-                <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Name</label>
-                <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="First Name"   />
+              <div className="mb-0 flex flex-col text-start w-full">
+                <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Full Name</label>
+                <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="Full Name"   />
+                { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}
+              </div>
+              <div className="mb-0 flex flex-col text-start w-full">
+                <label htmlFor="userName" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Username</label>
+                <input type="text" id="userName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('userName')}  placeholder="Enter new username"   />
                 { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}
               </div>
               
@@ -164,54 +170,91 @@ function Login({onLogin}) {
 
      
           
-            <div className='flex flex-col justify-between items-center gap-4 w-full'>
-              <div className="mb-4 flex flex-col text-start w-full">
+            <div className='flex flex-col md:flex-row justify-between items-center gap-4 w-full'>
+              <div className="mb-0 flex flex-col text-start w-full">
                 <label htmlFor="password" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Create password</label>
-                <input type="password" id="password" 
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  
-                placeholder='*******' 
-                {...register('password')}
-                onChange={handlePasswordChange}
-                 />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="*******"
+                    {...register('password')}
+                    onChange={handlePasswordChange}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                    onClick={toggleShowPassword}
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </div>
+                </div>
                 {errors.password && <p  className='text-red-400 text-xs'>{errors.password.message}</p>}
               </div>
-              <div className="mb-4 flex flex-col text-start w-full">
+              <div className="mb-0 flex flex-col text-start w-full">
                 <label htmlFor="confirmPassword" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Confirm password</label>
-                <input type="password" id="confirmPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder='*******' {...register('confirmPassword')}  />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="confirmPassword"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="*******"
+                    {...register('confirmPassword')}
+                    onChange={handlePasswordChange}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                    onClick={toggleShowPassword}
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </div>
+</div>
                 { errors.confirmPassword && <p  className='text-red-400 text-xs'>{errors.confirmPassword.message}</p>}
               </div>
             </div>
           
           {/*  */}
-          <div className='mb-5'>
-            <p className='text-sm text-black'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
-          </div>
-          <div >
-              <button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Create account</button>
+           <div className='mb-3 mt-4 flex flex-row justify-center items-center'>
+              <p className='text-sm text-black'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
+            </div>
+            <div >
+                <button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Create account</button>
             </div>
         </form>
             : 
 
-            <form  className='w-full md:w-full h-full bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
-             <div className='mb-6 md:mb-10 flex flex-col justify-center items-center'>
-              <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#1c7ee7]">Welcome Back!</span></h2>
-              <p className='text-black text-lg'>Enter your details to login</p>
-            </div>
+            <form  className='w-full md:w-full h-full flex flex-col items-center justify-center bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
+             
 
-            <div className='flex flex-col justify-between items-start gap-4 w-full mb-4'>
+            <div className='flex flex-col justify-between items-start gap-4 w-full mb-0'>
               <div className="mb-4 flex flex-col text-start w-full">
-                <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Name</label>
-                <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="First Name"   />
+                <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Username</label>
+                <input type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('name')}  placeholder="Userame"   />
                 { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}
               </div>
               
             </div>
 
           
-            <div className='flex flex-row justify-between items-center'>
+            <div className='flex flex-row justify-between items-center w-full'>
               <div className="mb-6 flex flex-col text-start w-full">
                 <label htmlFor="password" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Enter password</label>
-                <input type="password" id="loginPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder='*******' {...register('password')} />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="*******"
+                    {...register('password')}
+                    onChange={handlePasswordChange}
+                  />
+                  <div
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                    onClick={toggleShowPassword}
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </div>
+                </div>
                 {errors.password && <p  className='text-red-400 text-xs'>{errors.password.message}</p>}
               </div>
              
@@ -231,17 +274,45 @@ function Login({onLogin}) {
         }
       </div>
       
-     <div className='w-full md:w-1/2 h-auto md:h-full flex flex-col justify-center items-center py-12 md:py-24 mb-8 md:mb-0   loginBanner'>
-        
-        <div className='w-2/3 flex justify-center items-center h-full'>
-          <FaSmile 
-         
-          className="text-9xl"
-          style={{ color: iconColor ? iconColor : '#b1b1bb' }} 
-          
-          />
-         
+     <div className='w-full md:w-2/5 h-auto md:h-5/6  flex flex-col justify-start items-center gap-8 py-12 md:py-16 md:pt-8 px-6 mb-8 md:mb-0   loginBanner'>
+        <div className='w-full flex flex-row items-start justify-end mb-8'>
+          <h1 className='text-[#1c7ee7] text-sm font-bold px-4 py-3 bg-white rounded-xl '>SECURE<span className='text-[#41fff9]'>CHECK</span></h1>
         </div>
+        {
+          page ?
+            <>
+              <div className='flex flex-col items-center justify-center gap-0'>
+                <div className='mb-0 md:mb-0 flex flex-col justify-center items-center'>
+                    <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold '><span className="text-[#41fff9]">Welcome! </span></h2>
+                    <p className='text-white font-bold text-lg'>Enter your details to create a new account</p>
+                </div>
+                <div className='w-2/3 flex justify-center items-center h-full'>
+                  <FaSmile 
+                
+                  className="text-9xl"
+                  style={{ color: iconColor ? iconColor : '#b1b1bb' }} 
+                  
+                  />
+                  
+                </div>
+              </div>
+            
+            </>
+            : 
+            <>
+            <div className='flex flex-col items-center justify-center gap-0'>
+              <div className='mb-2 md:mb-4 flex flex-col justify-center items-center'>
+                <h2 className='text-black dark:text-white text-xl md:text-2xl font-bold'><span className="text-[#41fff9] font-bold">Welcome Back!</span></h2>
+                <p className='text-white font-bold text-lg'>Enter your details to login</p>
+              </div>
+              <div className=''>
+                    <img src={secure} alt='secure' className='w-36 h-auto' /> 
+              </div>
+            </div>
+              
+            </>
+
+        }
       </div> 
 
     </div>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 // import SampleData from './sample'
 import AdminNavbar from '../../component/Navbar/Sidebar'
+import '../../component/Navbar/sidebar.css'
 import dashboardbanner from '/assets/dashboardbanner.jpg';
 import PasswordStatistic from './PasswordStatistic';
 import DataTable from '../../component/table/DataTable';

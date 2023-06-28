@@ -17,7 +17,7 @@ function DataTable({userData}) {
                     
                       <tr className='w-full'>
                       <th className='text-sm md:text-lg'> Name</th>
-                      <th className='text-sm md:text-lg'> Password</th>
+                      <th className='text-sm md:text-lg'> Username</th>
                       <th className='text-sm md:text-lg'> Strength</th>
                       <th className='text-sm md:text-lg'> Time</th>
                       </tr>
@@ -65,7 +65,7 @@ function DataTable({userData}) {
                                             {item.name}
                                             </strong>
                                           </td>
-                                          <td className='text-sm md:text-lg'>{item.password}</td>
+                                          <td className='text-sm md:text-lg'>{item.userName}</td>
                                           <td className='text-sm md:text-lg'><p className='status' style={{backgroundColor: color, color:text}}>{strength}</p></td>
                                           <td className='text-sm md:text-lg'>{time}</td>
                                         </tr>

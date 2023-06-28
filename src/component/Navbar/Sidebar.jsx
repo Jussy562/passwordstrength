@@ -1,6 +1,6 @@
 import React from 'react'
-import { HiUserGroup } from 'react-icons/hi';
-import { FaSmile,  } from 'react-icons/fa';
+// import { HiUserGroup } from 'react-icons/hi';
+import { FaSmile, FaUserCircle,  } from 'react-icons/fa';
 
 function AdminNavbar({
     handleWeakPassword,
@@ -10,27 +10,33 @@ function AdminNavbar({
     handleAllPassword,
     user,
     onLogout}) {
-    const name = user?.name.toUpperCase();
+    const name = user?.userName.toUpperCase();
   return (
-    <div className='w-full md:w-1/4 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full'>
-            <div className='flex flex-col  w-auto h-auto'>
-                <div className='flex flex-row justify-start mb-16'>
-                    <button onClick={onLogout}  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
-                    
+    <div className='w-full md:w-1/4 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full sidebar'>
+            <div className='flex flex-col  w-full h-auto'>
+                <div className='flex flex-row justify-between items-center w-full'>
+                    <div className='w-full flex flex-row items-start justify-start mb-16'>
+                        <h1 className='text-[#1c7ee7] text-sm font-bold px-4 py-3 bg-white rounded-xl '>SECURE<span className='text-[#41fff9]'>CHECK</span></h1>
+                    </div>
+                    {/* <div className='flex flex-row justify-start mb-16'>
+                        <button onClick={onLogout}  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                        
+                    </div> */}
                 </div>
-                <div className='mb-5'>
+                <div className='mb-5 flex flex-col items-center gap-4'>
+                    <FaUserCircle className='text-white text-6xl' />
                     <h1 className='text-gray-300 text-3xl'>Hello, <span className='text-white font-bold'>{name}</span></h1>
                 </div>
-                <p className='text-gray-300 mb-4 text-sm'>Welcome to your dashboard, kindly sort through the user and password</p>
+                <p className='text-gray-300 mb-4 text-sm'>Welcome to SECURECHECK dashboard, kindly sort through the user and password</p>
                 
                 
 
                 <div className='flex flex-col mt-12'>
                     <p className='text-lg font-bold text-gray-400'>
-                        View Based On
+                        View Based On Password Strength
                     </p>
 
-                    <div className='w-full flex flex-row md:flex-wrap  lg:flex-nowrap items-center justify-center mt-4 gap-4 xl:gap-7'>
+                    <div className='w-full grid grid-cols-3 items-center justify-center mt-4 gap-4  select'>
                         <div 
                         
                         className='flex flex-col justify-center items-center'>
@@ -90,6 +96,10 @@ function AdminNavbar({
                             <p className='text-gray-400'>All</p>
                         </div>
                     </div>
+                </div>
+                <div className='flex flex-row justify-center mt-8 w-full'>
+                        <button onClick={onLogout}  className=" text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-auto md:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                        
                 </div>
             </div>
 

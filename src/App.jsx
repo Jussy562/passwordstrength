@@ -32,7 +32,7 @@ function App() {
       // Check if the entered credentials match the stored values
 
       const user = passwordList.find(
-        (userData) => userData.name === data.name && userData.password === data.password
+        (userData) => userData.userName === data.name && userData.password === data.password
       );
       if (user) {
         setAuthData(user);

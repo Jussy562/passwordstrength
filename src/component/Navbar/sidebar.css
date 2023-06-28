@@ -1,0 +1,18 @@
+.sidebar {
+    overflow: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.5rem;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: rgba(3, 175, 228, 0.681);
+    visibility: hidden;
+  }
+
+  .sidebar:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
