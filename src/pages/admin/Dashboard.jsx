@@ -3,11 +3,13 @@ import React, {useState, useEffect} from 'react'
 import AdminNavbar from '../../component/Navbar/Sidebar'
 import '../../component/Navbar/sidebar.css'
 import dashboardbanner from '/assets/dashboardbanner.jpg';
+import dbanner from '/assets/dbanner.jpg';
 import PasswordStatistic from './PasswordStatistic';
 import DataTable from '../../component/table/DataTable';
+import UpdatePassword from './UpdatePassword';
 
 
-function Dashboard({onLogout}) {
+function Password_Strength_Dashboard({onLogout}) {
     const [passwordInfo, setPasswordInfo] = useState([]);
     const [passwordStrength, setPasswordStrength] = useState('');
     const [weakPasswords, setWeakPasswords] = useState(0);
@@ -16,6 +18,14 @@ function Dashboard({onLogout}) {
     const [veryStrongPasswords, setVeryStrongPasswords] = useState(0);
     const [allPasswords, setAllPasswords] = useState(0);
     const [loggedUser, setLoggedUser] = useState(null);
+    const [userData, setUserData] = useState(null);
+
+   
+    const handleUserDataUpdate = (updatedUserData) => {
+      setUserData(updatedUserData);
+    };
+
+
   
 
     useEffect(() => {
@@ -46,7 +56,7 @@ function Dashboard({onLogout}) {
           setAllPasswords(allCount);
     
         }
-      }, []);
+      }, [userData]);
     
       const handleWeakPassword = () => setPasswordStrength('Weak');
       const handleModeratePassword = () => setPasswordStrength('Moderate');
@@ -84,13 +94,20 @@ function Dashboard({onLogout}) {
         };
         return strengthOrder[a.strength] - strengthOrder[b.strength];
       });
+
+    
+
+     
       
   return (
-    <div className='flex flex-col w-full bg-[#e8e8e8] overflow-hidden'>
+  <>
+ 
+  <div className='flex flex-col w-full bg-[#f1f1f1] overflow-hidden'>
+        
         {/* <div className=' w-full banner h-40'>
             <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
         </div> */}
-        <div className='w-full h-full flex flex-col md:flex-row bg-[#f5f5f5]'>
+        <div className='w-full h-full flex flex-col md:flex-row bg-[#f1f1f1]'>
             
             <div className='w-full md:w-1/4 h-full left-0 top-0   py-0 '>
                 <AdminNavbar
@@ -104,7 +121,7 @@ function Dashboard({onLogout}) {
             </div>
             <div className='w-full md:w-3/4   top-0 flex flex-col items-center h-full relative left-0 '>
                 <div className=' w-full banner h-40 sticky'>
-                    <img src={dashboardbanner} alt='dashboard banner' className='banner-image h-full' /> 
+                    <img src={dbanner} alt='dashboard banner' className='banner-image h-full' /> 
                 </div>
                 <div className='px-2 md:px-4 w-full'>
                   <div className=' w-full shadow-xl rounded-lg bg-white p-4 md:p-6 mb-8 mt-12 flex flex-row flex-wrap gap-4 justify-center items-center h-auto'>
@@ -116,7 +133,12 @@ function Dashboard({onLogout}) {
                       <PasswordStatistic title='All' statistic={allPasswords} />
                   </div>
                   <div className='flex flex-col  w-full h-auto  py-8 md:py-10 pt-4 justify-start tablediv'>
-                    <DataTable userData={userForDisplay} />
+                    <DataTable 
+                    userData={userForDisplay} 
+                    onUpdateUserData={handleUserDataUpdate}
+                    
+                    
+                    />
                     
                   </div>
                 </div>  
@@ -124,7 +146,8 @@ function Dashboard({onLogout}) {
             </div>
         </div>
     </div>
+  </>
   )
 }
 
-export default Dashboard
+export default Password_Strength_Dashboard

@@ -102,13 +102,18 @@ function Login({onLogin}) {
 
     const handleLoginClick = () => {
      
-        navigate('/dashboard');
+        navigate('/pasword_strength_dashboard');
       
     };
 
     const onSubmitSignup = (data, e) => {
       let passwordList = JSON.parse(localStorage.getItem('passwordList')) || [];
       
+      const existingUser = passwordList.find(item => item.userName === data.userName && item.name === data.name);
+      if (existingUser) {
+        alert('Account with the same name or username already exists. Please choose a different name or username.');
+        return;
+      }
 
       const passwordStrength = getPasswordStrength(data.password);
       const formData = {
@@ -178,7 +183,7 @@ function Login({onLogin}) {
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="*******"
+                    placeholder="******************************"
                     {...register('password')}
                     onChange={handlePasswordChange}
                   />
@@ -198,7 +203,7 @@ function Login({onLogin}) {
                     type={showPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="*******"
+                    placeholder="******************************"
                     {...register('confirmPassword')}
                     onChange={handlePasswordChange}
                   />
@@ -215,7 +220,7 @@ function Login({onLogin}) {
           
           {/*  */}
            <div className='mb-3 mt-4 flex flex-row justify-center items-center'>
-              <p className='text-sm text-black'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
+              <p className='text-sm text-black font-bold'>Already have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Login</span></p>
             </div>
             <div >
                 <button type="submit" className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Create account</button>
@@ -244,7 +249,7 @@ function Login({onLogin}) {
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="*******"
+                    placeholder="******************************"
                     {...register('password')}
                     onChange={handlePasswordChange}
                   />
@@ -261,7 +266,7 @@ function Login({onLogin}) {
             </div>
               
               <div className='mb-5'>
-                <p className='text-sm text-black'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
+                <p className='text-sm text-black font-bold'>Don't have an account? <span className='text-red-500 cursor-pointer text-xs' onClick={toggleForm}>Create account</span></p>
               </div>
               <div>
                 <button 
@@ -306,7 +311,7 @@ function Login({onLogin}) {
                 <p className='text-white font-bold text-lg'>Enter your details to login</p>
               </div>
               <div className=''>
-                    <img src={secure} alt='secure' className='w-36 h-auto' /> 
+                    <img src={secure} alt='secure' className='w-56 h-auto' /> 
               </div>
             </div>
               

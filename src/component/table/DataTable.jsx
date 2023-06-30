@@ -1,12 +1,97 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
+import UpdatePassword from '../../pages/admin/UpdatePassword';
 
-function DataTable({userData}) {
-  console.log(userData);
+function DataTable({userData, onUpdateUserData,}) {
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const toggleModal = () => {
+      setShowUpdateModal(!showUpdateModal);
+    };
+
+    const [showTip, setShowTip] = useState(false);
+    const toggleTip = () => {
+      setShowTip(!showTip);
+    };
+
+
+
+    const [selectedItem, setSelectedItem] = useState({});
+  
   const currentDate = new Date();
+  useEffect(() => {
+    if (showUpdateModal && selectedItem) {
+      update.showModal(selectedItem);
+    } else {
+      update.close();
+      
+    }
+  }, [showUpdateModal, selectedItem]);
+  const handleModal = (item) => {
+    console.log('item:', item);
+    toggleModal();
+    setSelectedItem(item);
+    
+    
+  }
+
+  const showTooltip = () => {
+    toolTip.show();
+  }
+
+  const hideTooltip = () => {
+    toolTip.close();
+  }
+
+ 
+  
+ 
+  
+  const handleUpdatePassword = (data) => {
+    console.log(data);
+    // Retrieve passwordList from local storage
+  const passwordList = JSON.parse(localStorage.getItem('passwordList'));
+     // Update the specific object in passwordList
+  const updatedPasswordList = passwordList.map((user) => {
+    if (user.userName === data.userName && user.name === data.name) {
+      // Update the specific properties in the object
+      return {
+        ...user,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        strength: data.strength,
+        signupTime: data.signupTime
+      };
+    } else {
+      return user;
+    }
+  });
+  
+    
+     // Save the updated passwordList back to local storage
+  localStorage.setItem('passwordList', JSON.stringify(updatedPasswordList));
+  onUpdateUserData(updatedPasswordList);
+  
+  };
   
   return (
-    <div className="media rounded-2xl">
+    <>
+      <dialog 
+      id='update'
+      className='updateModal rounded-xl shadow-xl'>
+        <UpdatePassword 
+        onUpdate = {handleUpdatePassword}  
+        handleModal={handleModal}
+        item={selectedItem}
+         />
+      </dialog>
+      <dialog 
+      id='toolTip'
+      className='tip  shadow-xl px-4 py-6'>
+        <div className='w-full flex flex-row justify-center items-center'>
+          <p className='text-blue-500 text-sm font-bold'>Click to update Password</p>
+        </div>
+      </dialog>
+      <div className="media rounded-2xl">
  
         <div className="media-body w-full shadow-xl rounded-xl">
             
@@ -56,9 +141,10 @@ function DataTable({userData}) {
                       const isCurrentDate = signupDate && signupDate.toDateString() === currentDate.toDateString();
 
                       const time = signupDate ? (isCurrentDate ? signupDate.toLocaleTimeString() : signupDate.toLocaleDateString()) : 'NILL';
-
+                      console.log(userData);
                       return (
-                                        <tr key={index} className='text-start w-full'>
+                                        <tr key={index} className='text-start w-full' 
+                                        >
                                           <td className='text-sm md:text-lg'>
                                             <strong className='flex flex-row items-center gap-2'>
                                               <FaUserAlt />
@@ -66,7 +152,14 @@ function DataTable({userData}) {
                                             </strong>
                                           </td>
                                           <td className='text-sm md:text-lg'>{item.userName}</td>
-                                          <td className='text-sm md:text-lg'><p className='status' style={{backgroundColor: color, color:text}}>{strength}</p></td>
+                                          <td className='text-sm md:text-lg '>
+                                            <p
+                                            onMouseEnter={showTooltip}
+                                            onMouseLeave={hideTooltip}
+                                            onClick={() => handleModal(item)} 
+                                            className='status cursor-pointer' style={{backgroundColor: color, color:text}}>
+                                              {strength}</p>
+                                          </td>
                                           <td className='text-sm md:text-lg'>{time}</td>
                                         </tr>
                                       )
@@ -77,7 +170,8 @@ function DataTable({userData}) {
               </table>
             </div>
         </div>
-    </div>
+        </div>
+    </>
 
   )
 }

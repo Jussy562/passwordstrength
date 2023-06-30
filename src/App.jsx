@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,   } from 'react-router-dom';
 import '../src/pages/admin/admin.css'
 import '../src/pages/login/login.css';
 import '../src/component/table/table.css';
@@ -16,7 +16,7 @@ import PrivateRoute from './routes/ProtectedRoutes';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authData, setAuthData] = useState(null);
-
+  
 
 
   const handleLogin = (data) => {
@@ -38,6 +38,7 @@ function App() {
         setAuthData(user);
         setIsLoggedIn(true);
         localStorage.setItem('loginDetails', JSON.stringify(user));
+        
         
       } else {
         alert('Incorrect name or password. Try again!');
@@ -67,7 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login onLogin={handleLogin}  />} />
          
-          <Route path="/dashboard" element={<PrivateRoute isLoggedIn={isLoggedIn} ><Dashboard onLogout={handleLogout} /></PrivateRoute>} />
+          <Route path="/pasword_strength_dashboard" element={<PrivateRoute isLoggedIn={isLoggedIn} ><Dashboard onLogout={handleLogout} /></PrivateRoute>} />
            
            
         </Routes>

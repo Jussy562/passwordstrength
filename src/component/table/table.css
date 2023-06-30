@@ -86,7 +86,7 @@
   }
 
   tbody tr:hover {
-    background-color: #fff6;
+    background-color: rgba(242, 246, 253, 0.948);
   }
 
 
@@ -111,4 +111,9 @@
     border-collapse: collapse !important;
     padding: 1rem !important;
     border: none !important;
+  }
+
+  .tip {
+    clip-path: polygon(0% 0%, 95% 1%, 95% 12%, 100% 26%, 94% 21%, 94% 75%, 0% 75%);
+
   }
