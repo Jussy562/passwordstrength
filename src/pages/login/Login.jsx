@@ -59,18 +59,42 @@ function Login({onLogin}) {
     });
 
     const getPasswordStrength = (password) => {
-      if (password.length < 6) {
+
+      const passwordLength = password.length;
+      const uppercaseCount = (password.match(/[A-Z]/g) || []).length;
+      const lowercaseCount = (password.match(/[a-z]/g) || []).length;
+      const digitCount = (password.match(/[0-9]/g) || []).length;
+      const specialCharCount = (password.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\-\\]/g) || []).length;
+      
+      if (passwordLength === 6) {
+        if (uppercaseCount >= 1 && lowercaseCount >= 1 && digitCount >= 1 && specialCharCount >= 1) {
+          return 'Weak';
+        } else {
+          return 'Very Poor';
+        }
+      } else if (passwordLength > 6 && passwordLength < 8) {
+        if (uppercaseCount >= 2 || lowercaseCount >= 2 || digitCount >= 2 || specialCharCount >= 2) {
+          return 'Moderate';
+        } else {
+          return 'Weak';
+        }
+      } else if (passwordLength >= 8 && passwordLength < 10) {
+        if (uppercaseCount >= 3 || lowercaseCount >= 3 || digitCount >= 3 || specialCharCount >= 1) {
+          return 'Strong';
+        } else {
+          return 'Moderate';
+        }
+      }else if (passwordLength >= 10) {
+        if (uppercaseCount >= 4 || lowercaseCount >= 4 || digitCount >= 4 || specialCharCount >= 2) {
+          return 'Very Strong';
+        } else {
+          return 'Strong';
+        }
+      } else {
         return 'Very Poor';
-      } else if (password.length === 6) {
-        return 'Weak';
       }
-      else if (password.length > 6 && password.length < 8) {
-        return 'Moderate';
-      } else if (password.length >= 8 && password.length < 12) {
-        return 'Strong';
-      } else if (password.length >= 12) {
-        return 'Very Strong';
-      }
+
+
     }
 
     const handlePasswordChange = (e) => {
