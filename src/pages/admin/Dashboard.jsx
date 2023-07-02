@@ -117,7 +117,8 @@ function Password_Strength_Dashboard({onLogout}) {
                 handleVeryStrongPassword={handleVeryStrongPassword}
                 handleAllPassword={handleAllPassword}
                 user = {loggedUser}
-                onLogout={onLogout} />
+                onLogout={onLogout}
+                onUpdateUserData={handleUserDataUpdate} />
             </div>
             <div className='w-full md:w-3/4   top-0 flex flex-col items-center h-full relative left-0 '>
                 <div className=' w-full banner h-40 sticky'>
@@ -135,7 +136,7 @@ function Password_Strength_Dashboard({onLogout}) {
                   <div className='flex flex-col  w-full h-auto  py-8 md:py-10 pt-4 justify-start tablediv'>
                     <DataTable 
                     userData={userForDisplay} 
-                    onUpdateUserData={handleUserDataUpdate}
+                    
                     
                     
                     />

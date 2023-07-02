@@ -8,8 +8,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 function UpdatePassword({onUpdate, handleModal, item}) {
    
 
-    const selectedItem = item;
-    console.log('item:', selectedItem);
+    const user = item;
+    console.log('item:', user);
     const [showPassword, setShowPassword] = useState(false);
     const toggleShowPassword = () => {
       setShowPassword(!showPassword);
@@ -67,7 +67,7 @@ function UpdatePassword({onUpdate, handleModal, item}) {
   
         const passwordStrength = getPasswordStrength(data.password);
         const formData = {
-            ...selectedItem,
+            ...user,
             password: data.password,
             confirmPassword: data.confirmPassword,
             signupTime: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
@@ -85,9 +85,9 @@ function UpdatePassword({onUpdate, handleModal, item}) {
   return (
     <div className='updateModal'>
         {
-          selectedItem && (
+          user && (
             <div className='w-full flex flex-row justify-start items-center'>
-              <h3 className='text-[#3296ee] text-lg font-bold'>{selectedItem.userName}</h3>
+              <h3 className='text-[#3296ee] text-lg font-bold'>{user.userName}</h3>
             </div>
           )
         }

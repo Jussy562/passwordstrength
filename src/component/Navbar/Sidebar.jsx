@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import { HiUserGroup } from 'react-icons/hi';
 import { FaSmile, FaUserCircle,  } from 'react-icons/fa';
+import UpdatePassword from '../../pages/admin/UpdatePassword';
 
 function AdminNavbar({
     handleWeakPassword,
@@ -9,10 +10,71 @@ function AdminNavbar({
     handleVeryStrongPassword,
     handleAllPassword,
     user,
+    onUpdateUserData,
     onLogout}) {
     const name = user?.userName.toUpperCase();
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const toggleModal = () => {
+      setShowUpdateModal(!showUpdateModal);
+    };
+    const [selectedItem, setSelectedItem] = useState({});
+  
+    
+    useEffect(() => {
+      if (showUpdateModal && selectedItem) {
+        update.showModal(selectedItem);
+      } else {
+        update.close();
+        
+      }
+    }, [showUpdateModal, selectedItem]);
+    const handleModal = (item) => {
+      console.log('item:', item);
+      toggleModal();
+      setSelectedItem(item);
+      
+      
+    }
+
+    const handleUpdatePassword = (data) => {
+        console.log(data);
+        // Retrieve passwordList from local storage
+      const passwordList = JSON.parse(localStorage.getItem('passwordList'));
+         // Update the specific object in passwordList
+      const updatedPasswordList = passwordList.map((user) => {
+        if (user.userName === data.userName && user.name === data.name) {
+          // Update the specific properties in the object
+          return {
+            ...user,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            strength: data.strength,
+            signupTime: data.signupTime
+          };
+        } else {
+          return user;
+        }
+      });
+      
+        
+         // Save the updated passwordList back to local storage
+      localStorage.setItem('passwordList', JSON.stringify(updatedPasswordList));
+      onUpdateUserData(updatedPasswordList);
+      
+      };
+
   return (
-    <div className='w-full md:w-1/4 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full sidebar'>
+    <>
+        <dialog 
+        id='update'
+        className='updateModal rounded-xl shadow-xl'>
+            <UpdatePassword 
+            onUpdate = {handleUpdatePassword}  
+            handleModal={handleModal}
+            item={user}
+            />
+        </dialog>
+        <div className='w-full md:w-1/4 md:fixed top-0 left-0  flex flex-col justify-between pt-8 pb-10 px-6 md:px-8   bg-[#13213C] h-auto md:h-full sidebar'>
             <div className='flex flex-col  w-full h-auto'>
                 <div className='flex flex-row justify-between items-center w-full'>
                     <div className='w-full flex flex-row items-start justify-start mb-16'>
@@ -98,12 +160,17 @@ function AdminNavbar({
                     </div>
                 </div>
                 <div className='flex flex-row justify-center mt-8 w-full'>
+                        <button onClick={() => handleModal({user})}  className=" text-white bg-[#afcbe3] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-auto md:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                        
+                </div>
+                <div className='flex flex-row justify-center mt-8 w-full'>
                         <button onClick={onLogout}  className=" text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-auto md:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
                         
                 </div>
             </div>
 
         </div>
+    </>
   )
 }
 
