@@ -31,7 +31,14 @@ function Login({onLogin}) {
   const signUpSchema = yup.object().shape({
     name: yup.string().required('Name is required'),
    
-    userName: yup.string().required('Username is requird'),
+    userName: yup
+    .string()
+    .required('Username is required')
+    .test(
+      'no-spaces',
+      'Username must not contain spaces',
+      (value) => !/\s/.test(value) // Check if there are no spaces in the username
+    ),
     password: yup
       .string()
       .test(
@@ -190,7 +197,7 @@ function Login({onLogin}) {
               <div className="mb-0 flex flex-col text-start w-full">
                 <label htmlFor="userName" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Username</label>
                 <input type="text" id="userName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register('userName')}  placeholder="Enter new username"   />
-                { errors.name && <p className='text-red-400 text-xs'>{errors.name.message}</p>}
+                { errors.userName && <p className='text-red-400 text-xs'>{errors.userName.message}</p>}
               </div>
               
             </div>
