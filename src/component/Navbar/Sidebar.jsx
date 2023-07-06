@@ -160,7 +160,7 @@ function AdminNavbar({
                     </div>
                 </div>
                 <div className='flex flex-row justify-center mt-8 w-full'>
-                        <button onClick={() => handleModal({user})}  className=" text-white bg-[#afcbe3] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-auto md:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                        <button onClick={() => handleModal({user})}  className=" text-white bg-[#afcbe3] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-auto md:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Password</button>
                         
                 </div>
                 <div className='flex flex-row justify-center mt-8 w-full'>

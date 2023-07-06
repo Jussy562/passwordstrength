@@ -84,13 +84,24 @@ function UpdatePassword({onUpdate, handleModal, item}) {
 
   return (
     <div className='updateModal'>
-        {
-          user && (
-            <div className='w-full flex flex-row justify-start items-center'>
-              <h3 className='text-[#3296ee] text-lg font-bold'>{user.userName}</h3>
-            </div>
-          )
-        }
+        <div className='flex flex-row justify-between items-center'>
+          {
+            user && (
+              <div className='w-full flex flex-row justify-start items-center'>
+                <h3 className='text-[#3296ee] text-lg font-bold'>{user.userName}</h3>
+              </div>
+            )
+          }
+
+          
+          <div className='w-auto'>
+                 <button 
+                 type='submit'
+                  onClick={handleModal}
+                 className="text-white bg-[#d2cfcf] hover:bg-[#da0f0f] hover:border-[#da0f0f]  focus:outline-none font-bold rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-gray-400 dark:hover:bg-red-700 dark:focus:ring-none">X</button>
+                 
+          </div>
+        </div>
         <form  className='w-full md:w-full h-full flex flex-col items-center justify-center bg-gray-50 shadow-2xl rounded-xl p-4  md:p-6 details' onSubmit={handleSubmit(onSubmit)}>
         
         <div className='flex flex-col md:flex-row justify-between items-center gap-4 w-full mb-6'>

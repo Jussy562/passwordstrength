@@ -80,7 +80,7 @@ function Login({onLogin}) {
       strength = 'Weak';
     }
     if (passwordLength >= 8) {
-      if (uppercaseCount >= 2 || lowercaseCount >= 2 || digitCount >= 2 || specialCharCount >= 2) {
+      if (uppercaseCount >= 2  || lowercaseCount >= 2 || digitCount >= 2 || specialCharCount >= 2) {
         strength = 'Moderate';
       }
       if (passwordLength >= 10) {
