@@ -80,10 +80,7 @@ function AdminNavbar({
                     <div className='w-full flex flex-row items-start justify-start mb-16'>
                         <h1 className='text-[#1c7ee7] text-sm font-bold px-4 py-3 bg-white rounded-xl '>SECURE<span className='text-[#41fff9]'>CHECK</span></h1>
                     </div>
-                    {/* <div className='flex flex-row justify-start mb-16'>
-                        <button onClick={onLogout}  className="text-white bg-[#3296ee] hover:bg-[#0f67da] hover:border-[#0f67da]  focus:outline-none font-bold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
-                        
-                    </div> */}
+                   
                 </div>
                 <div className='mb-5 flex flex-col items-center gap-4'>
                     <FaUserCircle className='text-white text-6xl' />

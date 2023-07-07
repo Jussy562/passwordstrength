@@ -68,35 +68,35 @@ function Login({onLogin}) {
     const getPasswordStrength = (password) => {
 
       const passwordLength = password.length;
-  const uppercaseCount = (password.match(/[A-Z]/g) || []).length;
-  const lowercaseCount = (password.match(/[a-z]/g) || []).length;
-  const digitCount = (password.match(/[0-9]/g) || []).length;
-  const specialCharCount = (password.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g) || []).length;
+      const uppercaseCount = (password.match(/[A-Z]/g) || []).length;
+      const lowercaseCount = (password.match(/[a-z]/g) || []).length;
+      const digitCount = (password.match(/[0-9]/g) || []).length;
+      const specialCharCount = (password.match(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/g) || []).length;
 
-  let strength = 'Very Poor';
+      let strength = 'Very Poor';
 
-  if (passwordLength >= 6) {
-    if (uppercaseCount >= 1 && lowercaseCount >= 1 && digitCount >= 1 && specialCharCount >= 1) {
-      strength = 'Weak';
-    }
-    if (passwordLength >= 8) {
-      if (uppercaseCount >= 2  || lowercaseCount >= 2 || digitCount >= 2 || specialCharCount >= 2) {
-        strength = 'Moderate';
-      }
-      if (passwordLength >= 10) {
-        if (uppercaseCount >= 3 || lowercaseCount >= 3 || digitCount >= 3 || specialCharCount >= 2) {
-          strength = 'Strong';
+      if (passwordLength >= 6) {
+        if (uppercaseCount >= 1 && lowercaseCount >= 1 && digitCount >= 1 && specialCharCount >= 1) {
+          strength = 'Weak';
         }
-        if (passwordLength >= 12) {
-          if (uppercaseCount >= 4 || lowercaseCount >= 4 || digitCount >= 4 || specialCharCount >= 3) {
-            strength = 'Very Strong';
+        if (passwordLength >= 8) {
+          if (uppercaseCount >= 2  || lowercaseCount >= 2 || digitCount >= 2 || specialCharCount >= 2) {
+            strength = 'Moderate';
+          }
+          if (passwordLength >= 10) {
+            if (uppercaseCount >= 3 || lowercaseCount >= 3 || digitCount >= 3 || specialCharCount >= 2) {
+              strength = 'Strong';
+            }
+            if (passwordLength >= 12) {
+              if (uppercaseCount >= 4 || lowercaseCount >= 4 || digitCount >= 4 || specialCharCount >= 3) {
+                strength = 'Very Strong';
+              }
+            }
           }
         }
       }
-    }
-  }
 
-  return strength;
+      return strength;
 
 
 
