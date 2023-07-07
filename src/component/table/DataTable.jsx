@@ -24,7 +24,7 @@ function DataTable({userData, }) {
  
         <div className="media-body w-full shadow-xl rounded-xl">
             
-            <h4 className="media-heading text-black text-lg font-bold mb-3 rounded-t-xl">Password Strength `Ladder Board</h4>
+            <h4 className="media-heading text-black text-lg font-bold mb-3 rounded-t-xl">PASSWORD STRENGTH LEADER BOARD</h4>
             <div className=' table-container rounded-2xl w-full'>
               <table className="user-table  rounded-2xl p-0 md:p-4  bg-white w-full">
                   <thead className='border-collapse border-none m-0 p-0 w-full'>
